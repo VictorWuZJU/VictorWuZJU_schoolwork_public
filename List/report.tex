@@ -1,0 +1,61 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{geometry, CJKutf8}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+\usepackage{listings}
+\usepackage{float, caption}
+
+\lstset{
+    basicstyle=\ttfamily, basewidth=0.5em
+}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{吴柏辰, 3230105440}
+\chead{数据结构与算法第四次作业}
+\rhead{Oct.20th, 2024}
+
+\section{测试程序的设计思路}
+
+首先创建链表（在测试代码中节点储存数据类型为int，也可以改为其他类型）命名为intList然后插入三个元素（可更改），用迭代器将其逐个输出，然后测试size和empty函数（观察cout输出就好了），至此完成了动态迭代器的测试，清空后再次添加元素使得链表非空，测试const迭代器，测试了insert和erase操作。考虑到可能出现的位于链表头尾的极端情况，测试哨兵节点功能，在头部和尾部进行了插入和删除操作。
+
+\section{测试的结果}
+
+测试结果一切正常。按照上面设计的顺序，依次完成了链表size，empty函数以及insert和erase函数，这是通过迭代器实现的，而迭代器中的自减操作是作为作业补充编写的，故迭代器（大概）运行正确。
+
+我用 valgrind 进行测试，发现没有发生内存泄露。
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
