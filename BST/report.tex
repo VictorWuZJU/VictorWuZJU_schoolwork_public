@@ -1,0 +1,58 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{geometry, CJKutf8}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+\usepackage{listings}
+\usepackage{float, caption}
+
+\lstset{
+    basicstyle=\ttfamily, basewidth=0.5em
+}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{吴柏辰, 3230105440}
+\chead{利用detachMin函数实现remove}
+\rhead{Nov.4th, 2024}
+
+\section{测试程序的设计思路}
+
+remove的设计前半段和旧版的remove没什么区别，最大的区别在于增加了一个currentparent节点变量用于管理当前节点的父节点，这是为了将删去最小节点的右子树接在当前（x值所在节点）节点的父节点的左侧或右侧，然后分别考虑四种情况：x节点没有子节点，只有左子树，只有右子树，有左右两个子树。前三种情况是简单的，其操作逻辑也和旧版remove逻辑类似，但是这里也使用了currentparent节点进行了指针修改。detachMin函数的功能是传入节点指针t，然后返回以t为根的树的最小节点，并修改树的结构，如果树的最小节点是根节点，会更新根节点的指针，如果最小节点还有右子树，则直接将最小节点的父节点链接上右子树，这也是通过追踪currentparent指针实现的。
+
+\section{测试的结果}
+
+测试结果一切正常。正确输出了删除后的树，没有改变节点元素之间的相对大小。
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
