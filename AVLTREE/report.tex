@@ -1,0 +1,63 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{geometry, CJKutf8}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+\usepackage{listings}
+\usepackage{float, caption}
+
+\lstset{
+    basicstyle=\ttfamily, basewidth=0.5em
+}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{吴柏辰, 3230105440}
+\chead{AVLTree的删除操作}
+\rhead{Nov.11st, 2024}
+
+\section{一点叠甲}
+
+交上这篇作业我已经做好了得零分的准备了，因为我的代码我自己写完之后也难以再次下手去检查修改和调试，也没有来得及检查内存和运行时间（不过一定是超了的），针对test里面的极端情况，一定会有非常严苛的要求。不过好还是决定要交上来，方便帅气美丽的助教哥哥姐姐了解这个班上最菜的一类人（也可能只是我一个人）的现状。而且课程实在太多不能保证时间都用在这一项作业上（我身边同学普遍觉得太繁杂）。我觉得承认我自己的菜并不可耻，这是诚信与尊严问题。
+
+\section{测试程序的设计思路}
+
+主要逻辑就是加入height，利用height来求平衡因子来决定左右旋操作，递归地完成remove操作，我认为需要注意的就是需要在insert时就做好对height的维护，避免一上来就导致这棵树太偏，可惜我认为我做的不是很好，导致不知道为什么输出结果很怪异。
+
+\section{测试的结果}
+
+我也不知道输出结果正确与否，但是肯定会出现很多我无法解决的错误。不过至少我尝试使用AI、讨论等多种方式去接近答案，我对算法本身的了解更加清楚了，碍于语法功底没法写出很漂亮的代码，我会在今后的作业与课余时间努力加强的。并且也确实报告了element copy happened,目前感觉有点无解，也不清楚这一问题产生的原因。
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
