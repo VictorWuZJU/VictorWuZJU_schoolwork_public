@@ -1,0 +1,67 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.3cm}
+
+% useful packages.
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{layout}
+\usepackage{listings}
+\usepackage{float, caption}
+
+\lstset{
+    basicstyle=\ttfamily, basewidth=0.5em
+}
+
+% some common command
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{吴柏辰, 3230105440}
+\chead{数据结构与算法 堆排序算法作业}
+\rhead{Dec.2nd, 2024}
+
+\section{测试思路}
+
+自己编写的算法名称为HeapSort。首先创建四个作业要求中的序列，然后分别计时测试。
+
+\section{测试的结果}
+
+对比了测试的时间，结果如下表格所示
+
+\begin{table}[htbp]
+\centering
+\caption{算法时间比较}
+\begin{tabular}{|c|c|c|}
+\hline
+算 法 & HeapSort & std::sort\_heap \\ \hline
+v1用时 & 75.2651ms & 47.9119ms \\ \hline
+v2用时 & 39.5669ms & 9.04086ms \\ \hline
+v3用时 & 43.5356ms & 43.5817ms \\ \hline
+v4用时 & 81.18ms & 46.1392ms \\ \hline
+\end{tabular}
+\end{table}
+
+
+\end{document}
