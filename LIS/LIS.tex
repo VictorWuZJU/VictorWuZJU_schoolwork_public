@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{ctex} % 支持中文
+\usepackage{booktabs} % 表格美化
+\usepackage{amsmath} % 数学公式
+\usepackage{graphicx} % 图片插入
+\usepackage{fancyhdr}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{吴柏辰, 3230105440}
+\chead{LIS算法简述}
+\rhead{Dec.23rd, 2024}
+
+\section{综述}
+
+一个整数序列 sequence，我们要在这个序列中找到最长的严格递增子序列。dp[i] 表示以第 i 个元素结尾的最长递增子序列的长度，prev[i] 表示在最长递增子序列中，第 i 个元素的前一个元素的索引。maxLength 用来记录目前找到的最长递增子序列的长度，maxIndex 用来记录这个最长递增子序列的最后一个元素的索引。使用两层循环来填充 dp 和 prev 数组。外层循环遍历序列中的每个元素 i。内层循环比较当前元素 i 和之前的所有元素 j（j < i）。如果 sequence[j] 小于 sequence[i]，说明 i 可以接在 j 后面形成递增子序列，我们更新 dp[i] 为 dp[j] + 1（即 j 结尾的最长递增子序列长度加一），并且更新 prev[i] 为 j。如果更新后的 dp[i] 大于 maxLength，说明我们找到了更长的递增子序列，更新 maxLength 和 maxIndex。回溯找到最长递增子序列：从 maxIndex 开始，根据 prev 数组回溯，找到最长递增子序列的所有元素，并将它们添加到 lis 数组中。由于我们是逆序添加元素的，所以最后需要将 lis 数组反转，以得到正确的顺序。函数最长递增子序列的长度和子序列本身。
+
+\section{伪代码}
+以下是算法的C++风格的伪代码：
+
+\begin{verbatim}
+pair<int, vector<int>> 最长递增子序列(vector<int>& sequence) {
+    int n = sequence.size();
+    vector<int> dp(n, 1); // 存储每个位置结束的LIS的长度
+    vector<int> prev(n, -1); // 存储子序列中的前一个索引
+    vector<int> lis; // 存储最长递增子序列
+    int maxLength = 0; // 存储LIS的长度
+    int maxIndex = 0; // 存储LIS起始位置的索引
+
+    // 动态规划求解LIS
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            if (sequence[j] < sequence[i] && dp[j] + 1 > dp[i]) {
+                dp[i] = dp[j] + 1;
+                prev[i] = j;
+            }
+        }
+        // 检查是否需要更新最长递增子序列的长度和起始索引
+        if (dp[i] > maxLength) {
+            maxLength = dp[i];
+            maxIndex = i;
+        }
+    }
+
+    // 回溯找到最长递增子序列
+    int index = maxIndex;
+    while (index != -1) {
+        lis.push_back(sequence[index]); // 添加元素到结果序列
+        index = prev[index]; // 移动到前一个元素
+    }
+    reverse(lis.begin(), lis.end()); // 反转序列以得到正确的顺序
+
+    return {maxLength, lis}; // 返回长度和子序列本身
+}
+\end{verbatim}
+
+
+\section{示例}
+考虑序列 \{10, 9, 2, 5, 3, 7, 101, 18\}。该算法将找到LIS \{2, 3, 7, 101\}，长度为4。以下是算法的逐步执行过程：
+
+\begin{enumerate}
+    \item 初始化dp数组和prev数组：
+    \begin{verbatim}
+    dp = [1, 1, 1, 1, 1, 1, 1, 1]
+    prev = [-1, -1, -1, -1, -1, -1, -1, -1]
+    \end{verbatim}
+    \item 动态规划填充dp和prev数组：
+    \begin{verbatim}
+    对于 i = 2 (9), j = 0 (10), dp[2] = 1, prev[2] = -1
+    对于 i = 3 (2), j = 0 (10), dp[3] = 1, prev[3] = -1
+    对于 i = 4 (5), j = 2 (9), dp[4] = 2, prev[4] = 2
+    对于 i = 5 (3), j = 3 (2), dp[5] = 2, prev[5] = 3
+    对于 i = 6 (7), j = 4 (5), dp[6] = 3, prev[6] = 4
+    对于 i = 7 (101), j = 5 (3), dp[7] = 4, prev[7] = 5
+    \end{verbatim}
+    \item 根据prev数组回溯最长递增子序列：
+    \begin{verbatim}
+    index = 7 (101), lis = [101]
+    index = 5 (7), lis = [101, 7]
+    index = 4 (5), lis = [101, 7, 5]
+    index = 3 (2), lis = [101, 7, 5, 2]
+    \end{verbatim}
+    \item 最终得到的最长递增子序列为 \{2, 5, 7, 101\}。
+\end{enumerate}
+
+\section{时间复杂度}
+
+算法中有两个嵌套的循环，外层循环遍历序列中的每个元素，内层循环则对每个元素之前的元素进行比较。内层循环中的每次比较操作都是常数时间的操作，即 O(1)。由于外层循环运行 n-1 次，内层循环的总运行次数是 1 + 2 + 3 + ... + (n-1)，这个求和公式的结果是 O(n\^2)。
+
+\end{document}
